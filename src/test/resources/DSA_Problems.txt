@@ -1,0 +1,81 @@
+
+### Arrays
+
+1. **Two Sum**
+   - **Description**: Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+   - **Input**: nums = [2, 7, 11, 15], target = 9
+   - **Output**: [0, 1]
+
+2. **Find Minimum in Rotated Sorted Array**
+   - **Description**: Find the minimum element in a rotated sorted array.
+   - **Input**: nums = [3, 4, 5, 1, 2]
+   - **Output**: 1
+
+3. **Product of Array Except Self**
+   - **Description**: Given an array, return an array where each element is the product of all elements in the input array except itself.
+   - **Input**: nums = [1, 2, 3, 4]
+   - **Output**: [24, 12, 8, 6]
+
+4. **Maximum Subarray**
+   - **Description**: Find the contiguous subarray within an array which has the largest sum.
+   - **Input**: nums = [-2,1,-3,4,-1,2,1,-5,4]
+   - **Output**: 6 (subarray [4,-1,2,1] has the largest sum)
+
+5. **Merge Intervals**
+   - **Description**: Given a collection of intervals, merge all overlapping intervals.
+   - **Input**: intervals = [[1,3],[2,6],[8,10],[15,18]]
+   - **Output**: [[1,6],[8,10],[15,18]]
+
+### Strings
+
+1. **Longest Substring Without Repeating Characters**
+   - **Description**: Find the length of the longest substring without repeating characters.
+   - **Input**: s = "abcabcbb"
+   - **Output**: 3 (substring "abc" is the longest)
+
+2. **Longest Palindromic Substring**
+   - **Description**: Given a string, find the longest palindromic substring.
+   - **Input**: s = "babad"
+   - **Output**: "bab" or "aba"
+
+3. **Anagrams**
+   - **Description**: Given two strings, check if they are anagrams of each other.
+   - **Input**: s = "anagram", t = "nagaram"
+   - **Output**: true
+
+4. **Group Anagrams**
+   - **Description**: Group a list of strings into anagrams.
+   - **Input**: strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
+   - **Output**: [["eat","tea","ate"],["tan","nat"],["bat"]]
+
+5. **Longest Common Prefix**
+   - **Description**: Write a function to find the longest common prefix string amongst an array of strings.
+   - **Input**: strs = ["flower","flow","flight"]
+   - **Output**: "fl"
+
+### Linked Lists
+
+1. **Reverse Linked List**
+   - **Description**: Reverse a singly linked list.
+   - **Input**: head = [1,2,3,4,5]
+   - **Output**: [5,4,3,2,1]
+
+2. **Merge Two Sorted Lists**
+   - **Description**: Merge two sorted linked lists and return it as a new list.
+   - **Input**: l1 = [1,2,4], l2 = [1,3,4]
+   - **Output**: [1,1,2,3,4,4]
+
+3. **Linked List Cycle**
+   - **Description**: Given a linked list, determine if it has a cycle in it.
+   - **Input**: head = [3,2,0,-4], pos = 1 (tail connects to the second node)
+   - **Output**: true
+
+4. **Add Two Numbers**
+   - **Description**: You are given two non-empty linked lists representing two non-negative integers. Add the two numbers and return the sum as a linked list.
+   - **Input**: l1 = [2,4,3], l2 = [5,6,4]
+   - **Output**: [7,0,8]
+
+5. **Copy List with Random Pointer**
+   - **Description**: A linked list is given such that each node contains an additional random pointer which could point to any node in the list or null. Return a deep copy of the list.
+   - **Input**: head = [[7,null],[13,0],[11,4],[10,2],[1,0]]
+   - **Output**: [[7,null],[13,0],[11,4],[10,2],[1,0]]
