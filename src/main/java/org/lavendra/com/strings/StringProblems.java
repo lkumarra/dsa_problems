@@ -58,6 +58,9 @@ public class StringProblems {
 
     }
 
+    /**
+     * Find fabonaci number
+     */
     public int fabonaciSeries(int index) {
         if (index == 0) {
             return 0;
@@ -153,11 +156,12 @@ public class StringProblems {
                 output.put(query, new ArrayList<>());
             }
         }
-
         return output;
     }
 
-    //Reverse a String while keeping space at same position
+    /**
+     * Reverse string keeping space at same position
+     */
     public String reverseStringWithSpaceAtSamePosition(String inputString) {
         List<Integer> spacePosition = new ArrayList<>();
         char[] charArray = inputString.toCharArray();
@@ -174,6 +178,9 @@ public class StringProblems {
         return output.toString().trim();
     }
 
+    /**
+     * Print all permutation and combinations
+     */
     public void printAllPermutations(char[] charArray, int fixedIndex) {
         if (fixedIndex == charArray.length - 1) {
             System.out.println(charArray);
@@ -186,12 +193,10 @@ public class StringProblems {
         }
     }
 
-    public void swap(char[] charArray, int i, int j) {
-        char temp = charArray[i];
-        charArray[i] = charArray[j];
-        charArray[j] = temp;
-    }
 
+    /**
+     * Print all subsequence of a string
+     */
     public void printALlSubsequence(char[] charArray, int fi, String subsequences) {
         if (fi == charArray.length) {
             System.out.println(subsequences);
@@ -199,6 +204,237 @@ public class StringProblems {
         }
         printALlSubsequence(charArray, fi + 1, charArray[fi] + subsequences);
         printALlSubsequence(charArray, fi + 1, subsequences);
+    }
+
+
+    //Find all permutation and combinations of a string
+    public void printAllPermutationsOfaString(char[] charArray, int fi) {
+        if (fi == charArray.length - 1) {
+            System.out.println(charArray);
+        }
+        for (int i = fi; i < charArray.length; i++) {
+            swap(charArray, i, fi);
+            printAllPermutations(charArray, fi + 1);
+            swap(charArray, i, fi);
+        }
+    }
+
+    public void swap(char[] charArray, int i, int j) {
+        char temp = charArray[i];
+        charArray[i] = charArray[j];
+        charArray[j] = temp;
+    }
+
+
+    public void printAllSubsequenceOfAString(char[] charArray, int fi, String subsequence) {
+        if (fi == charArray.length) {
+            System.out.println(subsequence);
+            return;
+        }
+        printAllSubsequenceOfAString(charArray, fi + 1, charArray[fi] + subsequence);
+        printAllSubsequenceOfAString(charArray, fi + 1, subsequence);
+    }
+
+    public String findLongestSubStringWithUniqueCharacters(String inputString) {
+        if (inputString == null || inputString.length() == 0) {
+            return "";
+        }
+        Set<Character> uniqueChars = new HashSet<>();
+        int startIndex = 0, endIndex = 0;
+        int maxLength = 0;
+        int maxStartIndex = 0;
+
+        while (endIndex < inputString.length()) {
+            char endChar = inputString.charAt(endIndex);
+            if (!uniqueChars.contains(endChar)) {
+                uniqueChars.add(endChar);
+                endIndex++;
+                if (endIndex - startIndex > maxLength) {
+                    maxLength = endIndex - startIndex;
+                    maxStartIndex = startIndex;
+                }
+            } else {
+                uniqueChars.remove(inputString.charAt(startIndex));
+                startIndex++;
+            }
+        }
+
+        return inputString.substring(maxStartIndex, maxStartIndex + maxLength);
+    }
+
+    public boolean isAllCharsUnique(String inputString) {
+        Set<Character> charSet = new HashSet<>();
+        for (char chars : inputString.toCharArray()) {
+            if (charSet.contains(chars)) {
+                return false;
+            } else {
+                charSet.add(chars);
+            }
+        }
+        return true;
+    }
+
+    public String findLongestPalindrome(String inputString) {
+        String longestPalindrome = "";
+        String currentPalindrome = "";
+        int startIndex = 0;
+        int endIndex = 0;
+        while (endIndex < inputString.length()) {
+            if (isPalindrome(inputString.substring(startIndex, endIndex + 1))) {
+                currentPalindrome = inputString.substring(startIndex, endIndex + 1);
+            }
+            endIndex++;
+            if (currentPalindrome.length() > longestPalindrome.length()) {
+                longestPalindrome = currentPalindrome;
+            }
+        }
+        return longestPalindrome;
+    }
+
+    public boolean isPalindrome(String inputString) {
+        int left = 0;
+        int right = inputString.length() - 1;
+        while (left < right) {
+            if (inputString.charAt(left) != inputString.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+
+
+    public boolean isTwoStringsAreAnagram(String string1, String string2) {
+        char[] charArray1 = string1.toCharArray();
+        char[] charArray2 = string2.toCharArray();
+        Arrays.sort(charArray1);
+        Arrays.sort(charArray2);
+        return Arrays.toString(charArray1).equals(Arrays.toString(charArray2));
+    }
+
+    /**
+     * **Anagrams**
+     * *Description**: Given two strings, check if they are anagrams of each other.
+     * *Input**: s = "anagram", t = "nagaram"
+     * *Output**: true
+     */
+    public boolean isTwoStringAnagramOptimised(String string1, String string2) {
+        if (string1.length() != string2.length()) {
+            return false;
+        }
+        int[] charArray = new int[256];
+        for (int i = 0; i < string1.length(); i++) {
+            charArray[string1.charAt(i)] = charArray[string1.charAt(i)] - 1;
+        }
+
+        for (int j = 0; j < string1.length(); j++) {
+            charArray[string1.charAt(j)] = charArray[string1.charAt(j)] + 1;
+        }
+
+        for (int num : charArray) {
+            if (num != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * **Group Anagrams**
+     * **Description**: Group a list of strings into anagrams.
+     * **Input**: strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
+     * **Output**: [["eat","tea","ate"],["tan","nat"],["bat"]]
+     */
+    public List<List<String>> groupAnagrams(List<String> inputString) {
+        HashMap<String, List<String>> map = new HashMap<>();
+        for (String word : inputString) {
+            char[] wordArray = word.toCharArray();
+            Arrays.sort(wordArray);
+            String key = new String(wordArray);
+            List<String> anagramList = map.getOrDefault(key, new ArrayList<>());
+            anagramList.add(word);
+            map.put(key, anagramList);
+        }
+        return new ArrayList<>(map.values());
+    }
+
+    /**
+     * **Longest Substring Without Repeating Characters**
+     * **Description**: Find the length of the longest substring without repeating characters.
+     * **Input**: s = "abcabcbb"
+     * **Output**: 3 (substring "abc" is the longest)
+     */
+    public String findLargestSubString(String string) {
+        int max = 0;
+        int startIndex = 0;
+        int endIndex = 0;
+        for (int right = 0, left = 0; right < string.length(); right++) {
+            int index = string.indexOf(string.charAt(right), left);
+            if (index != right) {
+                left = index + 1;
+            }
+            if (max < right - left + 1) {
+                max = right - left + 1;
+                startIndex = left;
+                endIndex = right;
+            }
+        }
+        return string.substring(startIndex, endIndex + 1);
+    }
+
+    /**
+     * **Longest Common Prefix**
+     * **Description**: Write a function to find the longest common prefix string amongst an array of strings.
+     * **Input**: strs = ["flower","flow","flight"]
+     * **Output**: "fl"
+     */
+    public String findLongestCommonPrefix(String[] stringArray) {
+        int index = stringArray[0].length();
+        int minIndex = 0;
+        int startIndex = 0;
+        int endIndex = 1;
+        String longestPrefix = "";
+        while (minIndex < index) {
+            String currentPrefix = stringArray[0].substring(startIndex, endIndex);
+            boolean isAllPrefixMatched = false;
+            for (int i = 1; i < stringArray.length; i++) {
+                if (endIndex <= stringArray[i].length()) {
+                    System.out.println(i);
+                    String subString = stringArray[i].substring(startIndex, endIndex);
+                    if (currentPrefix.equals(subString)) {
+                        isAllPrefixMatched = true;
+                    } else {
+                        isAllPrefixMatched = false;
+                        break;
+                    }
+                } else {
+                    isAllPrefixMatched = false;
+                }
+            }
+            if (isAllPrefixMatched) {
+                longestPrefix = currentPrefix;
+            } else {
+                break;
+            }
+            endIndex++;
+            minIndex++;
+        }
+        return longestPrefix;
+    }
+
+    //Find character count from string
+    public String findCharacterCount(String string) {
+        Map<Character, Integer> characterCountMap = new HashMap<>();
+        char[] characterArray = string.toCharArray();
+        for (char chars : characterArray) {
+            characterCountMap.put(chars, characterCountMap.getOrDefault(chars, 0) + 1);
+        }
+        StringBuilder builder = new StringBuilder();
+        characterCountMap.forEach((k, v) -> {
+            builder.append(k).append(v);
+        });
+        return builder.toString();
     }
 
 

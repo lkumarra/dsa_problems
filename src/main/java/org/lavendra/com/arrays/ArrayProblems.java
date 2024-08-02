@@ -199,10 +199,11 @@ public class ArrayProblems {
         }
         return outputArray;
     }
+
     //[-1,1,3,-2,2]
     //
     public int[] findSubarrayWithMaximumSum(int[] inputArray) {
-        int maximumSum = 0;
+        int maximumSum = Integer.MIN_VALUE;
         int currentSum = 0;
         int startIndex = 0;
         int endIndex = 0;
@@ -219,8 +220,177 @@ public class ArrayProblems {
                 tempStart = i + 1;
             }
         }
-        return Arrays.copyOfRange(inputArray, startIndex, endIndex+1);
+        return Arrays.copyOfRange(inputArray, startIndex, endIndex + 1);
+    }
+
+    //Find the largest sum of a subarray
+
+    public int findMaximumSumOfSubArray(int[] inputArray) {
+        int maxSum = Integer.MIN_VALUE;
+        int currentSum = 0;
+        for (int i = 0; i < inputArray.length; i++) {
+            currentSum = currentSum + inputArray[i];
+            if (currentSum > maxSum) {
+                maxSum = currentSum;
+            }
+
+            if (currentSum < 0) {
+                currentSum = 0;
+            }
+        }
+        return maxSum;
+    }
+
+    // Find subarray with maximum sum
+    public int[] findMaximumSumSubArray(int[] inputArray) {
+        int maxSum = Integer.MIN_VALUE;
+        int currentSum = 0;
+        int startIndex = 0;
+        int endIndex = 0;
+        int tempIndex = 0;
+
+        for (int i = 0; i < inputArray.length; i++) {
+            currentSum = currentSum + inputArray[i];
+            if (currentSum > maxSum) {
+                maxSum = currentSum;
+                startIndex = tempIndex;
+                endIndex = i;
+            }
+
+            if (currentSum < 0) {
+                currentSum = 0;
+                tempIndex = i + 1;
+            }
+        }
+        return Arrays.copyOfRange(inputArray, startIndex, endIndex + 1);
+    }
+
+    //Find pair of sum from an array of given target
+    public List<List<Integer>> findPairsOfSumOfGivenTarget(int[] inputArray, int target) {
+        List<List<Integer>> output = new ArrayList<>();
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num : inputArray) {
+            int component = target - num;
+            if (map.getOrDefault(component, 0) > 0) {
+                output.add(List.of(component, num));
+                map.put(component, map.get(component) - 1);
+            } else {
+                map.put(num, 1);
+            }
+        }
+        return output;
+    }
+
+    //Find pairs of given target
+    public List<List<Integer>> findIndicesOfMaximumSum(int[] inputArray, int target) {
+        List<List<Integer>> output = new ArrayList<>();
+        Map<Integer, List<Integer>> indexMap = new HashMap<>();
+        for (int i = 0; i < inputArray.length; i++) {
+            List<Integer> list = indexMap.getOrDefault(inputArray[i], new ArrayList<>());
+            list.add(i);
+            indexMap.put(inputArray[i], list);
+        }
+        for (int j = 0; j < inputArray.length; j++) {
+            int component = target - inputArray[j];
+            if (indexMap.containsKey(component)) {
+                List<Integer> complementIndices = indexMap.get(component);
+                for (int index : complementIndices) {
+                    if (index > j) {
+                        output.add(List.of(j, index));
+                    }
+                }
+            }
+        }
+        return output;
+
+    }
+
+    public List<int[]> mergeIntervals(int[][] inputArray) {
+        List<int[]> output = new ArrayList<>();
+        for (int i = 0; i < inputArray.length; i++) {
+            int[] firstArray = inputArray[i];
+            for (int j = i + 1; j < inputArray.length; j++) {
+                int substraction = Math.abs(firstArray[0] - firstArray[firstArray.length - 1]);
+                int[] secondArray = inputArray[j];
+                if (substraction == secondArray[0]) {
+                    firstArray[firstArray.length - 1] = secondArray[secondArray.length - 1];
+                }
+            }
+            output.add(firstArray);
+        }
+        return output;
     }
 
 
+    // Buy and Sell Stock Problem
+    public int findMaxProfitSellDay(int[] stockPrices) {
+        int maxProfit = Integer.MIN_VALUE;
+        int purchaseDay = 0;
+        int sellDay = 0;
+        for (int i = 0; i < stockPrices.length; i++) {
+            for (int j = 1; j < stockPrices.length; j++) {
+                int profit = stockPrices[j] - stockPrices[i];
+                if (profit > maxProfit) {
+                    maxProfit = profit;
+                    sellDay = j;
+                }
+            }
+        }
+        return sellDay + 1;
+    }
+
+    //Find the day for which profit is maximum
+    public int findMaxProfitSellDayOptimised(int[] stockPricesArray) {
+        int minPurchasePrice = stockPricesArray[0];
+        int maxProfitDay = 0;
+        int maxProfit = Integer.MIN_VALUE;
+        for (int i = 1; i < stockPricesArray.length; i++) {
+            int currentProfit = stockPricesArray[i] - minPurchasePrice;
+            if (currentProfit > maxProfit) {
+                maxProfit = currentProfit;
+                maxProfitDay = i + 1;
+            }
+            if (minPurchasePrice > stockPricesArray[i]) {
+                minPurchasePrice = stockPricesArray[i];
+            }
+        }
+        return maxProfitDay;
+    }
+
+    //Find the missing or disappeared number in an array
+    public List<Integer> findDisappearedNumber(int[] numberArray) {
+        List<Integer> missingNumberList = new ArrayList<>();
+        for (int i = 0; i < numberArray.length; i++) {
+            int index = Math.abs(numberArray[i]) - 1;
+            if (numberArray[index] > 0) {
+                numberArray[index] = -numberArray[index];
+            }
+        }
+        for (int i = 0; i < numberArray.length; i++) {
+            if (numberArray[i] > 0) {
+                missingNumberList.add(i + 1);
+            }
+        }
+        return missingNumberList;
+    }
+
+    //Merge two sorted array// input1 = [1,2,4,5], input2 = [3,6,7,8]
+    public int[] mergeTwoSortedArray(int[] arr1, int[] arr2) {
+        int[] mergedArray = new int[arr1.length + arr2.length];
+        int i = 0, j = 0, k = 0;
+        while (i < arr1.length && j < arr2.length) {
+            if (arr1[i] <= arr1[j]) {
+                mergedArray[k++] = arr1[i++];
+            } else {
+                mergedArray[k++] = arr2[j++];
+            }
+        }
+        while (i < arr1.length) {
+            mergedArray[k++] = arr1[i++];
+        }
+        while (j < arr2.length) {
+            mergedArray[k++] = arr2[j++];
+        }
+        return mergedArray;
+    }
 }

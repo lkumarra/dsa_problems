@@ -20,6 +20,18 @@ public class StringTest {
         //stringProblems.printFabonaciSeries(100);
         //System.out.println(stringProblems.fabonaciSeries(10));
         stringProblems.printALlSubsequence("abc".toCharArray(), 0, "");
+        stringProblems.printAllPermutationsOfaString("hello".toCharArray(), 0);
+        stringProblems.printAllSubsequenceOfAString("abc".toCharArray(), 0, "");
+        System.out.println(stringProblems.findLongestSubStringWithUniqueCharacters("helloa"));
+        System.out.println(stringProblems.findLongestPalindrome("abab"));
+        System.out.println(stringProblems.isTwoStringsAreAnagram("speed", "deeps"));
+        System.out.println(stringProblems.isTwoStringAnagramOptimised("speed", "deeps"));
+        List<String> inputList = List.of("eat", "tea", "tan", "ate", "nat", "bat");
+        System.out.println(stringProblems.groupAnagrams(inputList));
+        System.out.println(stringProblems.findLargestSubString("abcabcd"));
+        String[] longestPrefixInput = {"flower", "flow", "flowight"};
+        System.out.println(stringProblems.findLongestCommonPrefix(longestPrefixInput));
+        //System.out.println(stringProblems.findCharacterCount("lavendra"));
     }
 
 }

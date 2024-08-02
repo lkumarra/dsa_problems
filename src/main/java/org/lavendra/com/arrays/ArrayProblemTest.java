@@ -35,8 +35,25 @@ public class ArrayProblemTest {
         //int[] productArrayInput = {1, 2, 3, 4};
         //int[] productOutput = problems.findProductOfArrayElementExceptCurrent(productArrayInput);
         //System.out.println(Arrays.deepToString(new Object[]{productOutput}));
+        int[] arrayToFindSum = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
 
-        int[] arrayToFindSum = {-2,1,-3,4,-1,2,1,-5,4};
+        //int[] arrayToFindSum = {-1, -2, -3, 0};
         System.out.println(Arrays.toString(problems.findSubarrayWithMaximumSum(arrayToFindSum)));
+        //System.out.println(problems.findMaximumSumOfSubArray(arrayToFindSum));
+        System.out.println(Arrays.toString(problems.findMaximumSumSubArray(arrayToFindSum)));
+
+        //int[] inputArray = {2, 2, 1, 3, 0, 4, 2};
+        //System.out.println(problems.findPairsOfSumOfGivenTarget(inputArray, 4));
+        //System.out.println(problems.findIndicesOfMaximumSum(inputArray, 4));
+
+        int[] stockPricesArray = {7, 1, 5, 3, 6, 4};
+        System.out.println(problems.findMaxProfitSellDay(stockPricesArray));
+        System.out.println(problems.findMaxProfitSellDayOptimised(stockPricesArray));
+        int[] numbersArray = {1, 2, 4, 6, 2, 4};
+        System.out.println(problems.findDisappearedNumber(numbersArray));
+        int[] array1 = {1, 2, 4, 5};
+        int[] array2 = {3, 6, 7, 8};
+        System.out.println(Arrays.toString(problems.mergeTwoSortedArray(array1, array2)));
+
     }
 }
