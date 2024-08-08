@@ -32,6 +32,7 @@ public class StringTest {
         String[] longestPrefixInput = {"flower", "flow", "flowight"};
         System.out.println(stringProblems.findLongestCommonPrefix(longestPrefixInput));
         //System.out.println(stringProblems.findCharacterCount("lavendra"));
+        System.out.println(stringProblems.insertSemicolonInString("SD232EEREREDFD"));
     }
 
 }

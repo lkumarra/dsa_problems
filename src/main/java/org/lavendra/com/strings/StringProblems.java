@@ -437,5 +437,16 @@ public class StringProblems {
         return builder.toString();
     }
 
+    public String insertSemicolonInString(String inputString) {
+        StringBuilder builder = new StringBuilder();
+        int endIndex = 2;
+        for (int i = 0; i < inputString.length(); i = i + 2) {
+            String subStr = inputString.substring(i, endIndex);
+            builder.append(subStr);
+            builder.append(":");
+            endIndex = endIndex + 2;
+        }
+        return builder.toString();
+    }
 
 }
